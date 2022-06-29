@@ -69,7 +69,7 @@ dependencies {
     compileOnly fileTree(gameDirectory + "/lib/")
     compileOnly fileTree("./mods/") // Add all mods located in local mods folder
 
-    compileOnly "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
 }
 
 classes.doLast {
@@ -139,7 +139,12 @@ task buildModJar(type: Jar) {
     dependsOn "classes"
 
     // Add mod output
+    duplicatesStrategy DuplicatesStrategy.EXCLUDE
     from sourceSets.main.java.outputDir
+    // Grab implementation dependencies and package them into the jar
+    from {
+        configurations.runtimeClasspath.files.collect {it.isDirectory() ? it : zipTree(it)}
+    }.exclude 'META-INF/**'
 
     archiveName "${jarName}.jar"
     destinationDir file(buildLocation)
