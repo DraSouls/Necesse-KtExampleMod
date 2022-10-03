@@ -4,6 +4,7 @@ import necesse.engine.Screen
 import necesse.engine.localization.Localization
 import necesse.engine.network.PacketReader
 import necesse.engine.network.packet.PacketSpawnProjectile
+import necesse.engine.registries.DamageTypeRegistry
 import necesse.engine.sound.SoundEffect
 import necesse.engine.util.GameRandom
 import necesse.entity.mobs.AttackAnimMob
@@ -26,7 +27,7 @@ class ExampleProjectileWeapon : ProjectileToolItem(400) {
     init {
         rarity = Rarity.RARE
         animSpeed = 300 // 300 ms attack time
-        attackDmg = GameDamage(GameDamage.DamageType.MAGIC, 20f) // 20 magic damage
+        attackDmg = GameDamage(DamageTypeRegistry.MAGIC, 20f) // 20 magic damage
         velocity = 100 // Velocity of projectiles
         knockback = 50 // Knockback of projectiles
         attackRange = 1500 // Range of the projectile

@@ -3,10 +3,14 @@
 See: https://github.com/DrFair/ExampleMod
 
 #### Notes
-- ByteBuddy patches that <ins>reassign</ins> `@Advice.Return` parameters might not work due to Kotlin having
-final (`val`) function parameters. It is recommended to write game patches in Java instead.
-  - Affected class: [ExampleMethodPatch](src/main/kotlin/examplemod/examples/ExampleMethodPatch.kt)
-- Probably other stuff. The features are untested yet, but loading the mod works fine.
+- ByteBuddy patches that <ins>reassign</ins> `@Advice.Return` parameters WILL NOT work due to Kotlin having
+final (`val`) function parameters.
+  - **Workaround**: [examples/ExampleMethodPatch.java](src/main/kotlin/examplemod/examples/ExampleMethodPatch.java).
+  A Java file can coexist with Kotlin source files just fine,
+  it gets compiled and behaves in its package as expected,
+  so simply write the patches that need return values in Java.
+- Probably other stuff (unlikely unless it deals with patches).
+  Loading the mod works fine, and most equipments work.
 
 ---
 
